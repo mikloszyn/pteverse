@@ -31,6 +31,19 @@ def load_user(user_id):
 def create_tables():
     db.create_all()
 
+# LOGOWANIE
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for('home'))
+        flash("Nieprawidłowy login lub hasło!")
+    return render_template('index.html', page='login')
+
 # REJESTRACJA
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -45,19 +58,6 @@ def register():
         flash("Rejestracja zakończona! Zaloguj się.")
         return redirect(url_for('login'))
     return render_template('index.html', page='register')
-
-# LOGOWANIE
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password, password):
-            login_user(user)
-            return redirect(url_for('home'))
-        flash("Nieprawidłowy login lub hasło!")
-    return render_template('index.html', page='login')
 
 # WYLOGOWANIE
 @app.route('/logout')
