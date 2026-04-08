@@ -11,14 +11,14 @@ body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg,#
 .card { padding:20px; border-radius:15px; box-shadow:0 8px 16px rgba(0,0,0,0.2); margin-bottom:15px; }
 textarea, input { border-radius:10px; }
 button { border-radius:10px; }
-h1 { text-align:center; color:#fff; text-shadow:2px 2px 5px rgba(0,0,0,0.3); margin-bottom:30px; }
+h1, h2 { text-align:center; color:#fff; text-shadow:2px 2px 5px rgba(0,0,0,0.3); margin-bottom:30px; }
 </style>
 </head>
 <body>
 <div class="container">
 {% if page == 'login' %}
     <div class="card mx-auto" style="max-width:400px;">
-        <h2 class="text-center mb-3">Logowanie</h2>
+        <h2>Logowanie</h2>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="alert alert-warning">
@@ -39,7 +39,7 @@ h1 { text-align:center; color:#fff; text-shadow:2px 2px 5px rgba(0,0,0,0.3); mar
     </div>
 {% elif page == 'register' %}
     <div class="card mx-auto" style="max-width:400px;">
-        <h2 class="text-center mb-3">Rejestracja</h2>
+        <h2>Rejestracja</h2>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="alert alert-warning">
